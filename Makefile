@@ -15,6 +15,8 @@ SHELL = /bin/sh
 
 include src/make/variables.mk # load variables from a separate makefile file
 include src/make/setup.mk # store setup targets in a separate makefile
+
+include .env
 #=======================================================================
 # Targets
 #======================================================================
@@ -28,11 +30,20 @@ deps: validate_env_vars
 	@make -s create_svc_cicd_user_and_role
 
 install:
-	@echo && echo "${INFO}Called makefile target 'install'. Set up GX (Great Expectations) project.${COLOUR_OFF}" && echo
-	@make terraform init
+	@echo && echo "${INFO}Called makefile target 'install'. Initialise the Terraform project.${COLOUR_OFF}" && echo
+	@terraform init
 
-b:
+stage_changes_pt1:
+	git checkout -b dbwh
+	git add main.tf
+	git commit -m "Add Database and Warehouse"
+	git push origin HEAD
+
+stage_changes_pt2:
 	terraform plan
+
+run_changes:
+	terraform apply
 
 test:
 	@echo && echo "${INFO}Called makefile target 'test'. Set up GX (Great Expectations) project.${COLOUR_OFF}" && echo
