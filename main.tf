@@ -12,11 +12,5 @@ provider "snowflake" {
 }
 
 resource "snowflake_database" "db" {
-  name = "ACCOUNTADMIN"
-}
-
-resource "snowflake_warehouse" "warehouse" {
-  name           = "TF_DEMO"
-  warehouse_size = "XSMALL"
-  auto_suspend   = 60
+  name = "TF_DEMO"
 }
