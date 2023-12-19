@@ -1,0 +1,5 @@
+colorlog==6.7.0
+j2cli==0.3.10
+snowflake-connector-python==2.8.1
+schemachange==3.5.3
+pyarrow==10.0.1
